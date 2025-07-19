@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smartdon Blog Page</title>
+ <style>
+  /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #e0f4ff;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* menu toggle */
+
+.menu-toggle {
+  font-size: 28px;
+  padding: 15px 20px;
+  display: flex;
+  color: white;
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+}
+
+.menu-toggle:hover{
+  transform:  scaleX(1.1);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background-color: #0072ff;
+  color: white;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 25px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #005bb5;
+  border-radius: 5px;
+}
+
+.search-input {
+  width: 80%;
+  padding: 8px;
+  margin-left: 10%;
+  border-radius: 5px;
+  border: none;
+    margin-left: -3px;
+  outline: none;
+}
+
+.sidebar.show {
+  left: 0;
+}
+
+
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  background-color: #cceeff;
+  padding: 40px 20px;
+}
+
+.hero h1 {
+  font-size: 2em;
+  color: #003366;
+}
+
+.hero p {
+  color: #004466;
+}
+
+/* Main Container */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+/* Blog Post */
+.blog-post {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.blog-post h2 {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #0a1a33;
+}
+
+.blog-post .date {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.blog-post .media img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 12px;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Ad Cards */
+.ad {
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.ad h3 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.ad p {
+  margin-bottom: 10px;
+}
+
+.yellow {
+  background-color: #fff9c4;
+}
+
+.blue {
+  background-color: #e3f2fd;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* Newsletter */
+.newsletter-section {
+  text-align: center;
+  border-top: 2px solid #0072ff;
+  height: 200px;
+  background-color: white;
+  width: 100%;
+}
+
+.word {
+  font-size: 22px;
+  color: #333;
+  
+ margin-top: 40px;
+}
+
+.subscribe-form {
+  margin-top: 5px;
+
+
+}
+
+.subscribe-form input[type="email"] {
+  padding: 10px;
+  width: 250px;
+  max-width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 0px;
+}
+
+.subscribe-form button {
+  padding: 10px 20px;
+  background-color: #0072ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+  border: white solid 2px;
+  
+}
+
+.subscribe-form button:hover {
+  transform: scaleX(1.1);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons a img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  margin-top: 10px;
+}
+
+.social-icons a img:hover {
+  transform: scale(1.1);
+}
+
+/* Footer */
+footer {
+  background-color: #a7d5f5;
+  text-align: center;
+  padding: 20px;
+}
+#footer{
+  color: white;
+  text-align: center;
+  font-size: larger;
+}
+
+body.dark-mode .btn,
+body.dark-mode.footer-btn,
+body.dark-mode footer{
+  background-color: #1a1a1a !important;
+  color: #e4e4e4 !important;
+  border-color: #444 !important;
+}
+
+body.dark-mode input,
+body.dark-mode button {
+  background-color: #2a2a2a !important;
+  color: #e4e4e4 !important;
+  border: 2px solid #555 !important;
+}
+
+body.dark-mode{
+  background: #121212 !important;
+  color: #e4e4e4 !important;
+}
+
+body.dark-mode nav{
+background-color: #999 !important;
+}
+
+body.dark-mode .hero{
+background: #121212 !important;
+}
+
+body.dark-mode .hero h1{
+color: #06c5f5;
+}
+
+
+body.dark-mode .scroll-container{
+background: #999 !important;
+}
+
+body.dark-mode .container{
+background: #999 !important;
+}
+
+body.dark-mode .yellow{
+background: #2eddb1 !important;
+}
+
+body.dark-mode .blue{
+background: #dfc63a !important;
+}
+
+body.dark-mode p{
+color: white;
+}
+
+body.dark-mode .blog-post{
+background: rgb(54, 123, 187) !important;
+}
+
+body.dark-mode .sidebar ul li a:hover{
+background-color: #121212;
+  border-radius: 5px;
+}
+
+ </style>
+</head>
+<body>
+<div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+  
+  <nav class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+      <li><a href="about.html" onclick="closeMenu()">About</a></li>
+      <li><a href="services.html" onclick="closeMenu()">Our Services</a></li>
+      <li><input type="text" placeholder="Search..." class="search-input" /></li>
+      <li><a href="signup.html" onclick="closeMenu()">Sign Up</a></li>
+      <li><a href="account.html" onclick="closeMenu()">Account</a></li>
+      
+    </ul>
+  </nav>
+  <header class="hero">
+    <h1>Welcome to Smartdon Blog</h1>
+    <p>Insights, Inspiration, and Innovation from Smartdon Technology</p>
+  </header>
+
+  <main class="container">
+
+    <!-- Blog Post 1 -->
+    <section class="blog-post">
+      <h2>How to Build an Innovative Brand in 2025</h2>
+      <p class="date">July 6, 2025</p>
+      <p>Discover powerful tips and trends for building a digital-first brand using stunning graphics and intuitive web design.</p>
+      <div class="media">
+        <img src="video-thumbnail1.jpg" alt="Advice.mp4" />
+      </div>
+      <a href="#" class="read-more">Read More</a>
+    </section>
+
+    <!-- Ad 1 -->
+    <section class="ad yellow">
+      <h3>🎨 Need a Website or Logo?</h3>
+      <p>Let Smartdon Technology design your brand from scratch. We craft stunning websites, logos, flyers, and more.</p>
+      <a href="order-form.html" class="btn">Get Started</a>
+    </section>
+
+    <!-- Blog Post 2 -->
+    <section class="blog-post">
+      <h2>Why DIY Tech is the Future</h2>
+      <p class="date">June 28, 2025</p>
+      <p>Explore how DIY tech products from scratch. Whether it’s a smart device, automation, or a stunning web app — we’ve got you covered.</p>
+      <div class="media">
+        <img src="Aurorux.png"   alt="Product image of a smart device" />
+      </div>
+    </section>
+
+    <!-- Ad 2 -->
+    <section class="ad blue">
+      <h3>@ Hire Us for Your Next Big Idea!</h3>
+      <p>We design and build tech products from scratch. Whether it’s a smart device, automation, or a stunning web app — we’ve got you covered</p>
+      <a href="services.html" class="btn">See Our Work</a>
+    </section>
+
+  </main>
+
+  <!-- Newsletter -->
+  <div class="newsletter-section">
+     <h3 class="word">Subscribe to Newsletter</h3>
+    <form action="https://formspree.io/f/xnnvyobz" method="post"  class="subscribe-form">
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+    <div class="social-icons">
+      <a href="#"><img src="facebook.png" alt="Facebook" /></a>
+      <a href="#"><img src="twitter.png" alt="Twitter" /></a>
+      <a href="#"><img src="instagram.png" alt="Instagram" /></a>
+      <a href="#"><img src="linkedin.png" alt="LinkedIn" /></a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+        Smartdon Technology &copy; Copyright @ 2025, LLC, All Rights Reserved
+      </footer>
+
+
+      <script src="script.js"></script>
+</body>
+</html>

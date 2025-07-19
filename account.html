@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Account Settings</title>
+  <link rel="icon" href="default-profile.png">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      color: #222;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .settings-card {
+      display: flex;
+      justify-content: space-between;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+    }
+
+    .profile-section, .settings-section {
+      flex: 1;
+      margin: 10px;
+      min-width: 250px;
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 10px;
+      object-fit: cover;
+      border: 2px solid #ccc;
+    }
+
+    .upload-btn {
+      display: block;
+      margin: 10px auto;
+      padding: 6px 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 90%;
+      padding: 8px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .save-btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #0056D2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .switch-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .switch-label input {
+      display: none;
+    }
+
+    .slider {
+      position: relative;
+      width: 50px;
+      height: 24px;
+      background-color: #ccc;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #007BFF;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .change-password {
+      padding: 10px 16px;
+      background: #ccc;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #e4e4e4;
+    }
+
+    body.dark-mode .settings-card {
+      background-color: #1e1e1e;
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+    }
+
+    body.dark-mode input,
+    body.dark-mode .upload-btn,
+    body.dark-mode .change-password,
+    body.dark-mode .save-btn {
+      background-color: #2a2a2a;
+      color: white;
+      border: 1px solid #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Account Settings</h2>
+    <div class="settings-card">
+      <div class="profile-section">
+        <img src="default-profile.png" alt="Profile" id="profilePic" class="profile-pic">
+        <input type="file" id="uploadInput" accept="image/*">
+        <label>Full Name</label>
+        <input type="text" id="nameInput" placeholder="Your name">
+        <label>Email</label>
+        <input type="email" id="emailInput" placeholder="you@example.com">
+      </div>
+      <div class="settings-section">
+        <label class="switch-label">
+          Dark Mode
+          <input type="checkbox" id="darkToggle">
+          <span class="slider round"></span>
+        </label>
+        <button class="change-password">Change Password</button>
+      </div>
+    </div>
+    <button class="save-btn" id="saveBtn">Save Changes</button>
+  </div>
+
+  <script>
+    // Dark Mode Toggle
+    const darkToggle = document.getElementById("darkToggle");
+    if (localStorage.getItem("smartdon-theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      darkToggle.checked = true;
+    }
+    darkToggle.addEventListener("change", () => {
+      if (darkToggle.checked) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("smartdon-theme", "dark");
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("smartdon-theme", "light");
+      }
+    });
+
+    // Load stored user data
+    const nameInput = document.getElementById("nameInput");
+    const emailInput = document.getElementById("emailInput");
+    const profilePic = document.getElementById("profilePic");
+
+    nameInput.value = localStorage.getItem("smartdon-name") || "";
+    emailInput.value = localStorage.getItem("smartdon-email") || "";
+    const storedImage = localStorage.getItem("smartdon-img");
+    if (storedImage) profilePic.src = storedImage;
+
+    // Save changes
+    document.getElementById("saveBtn").addEventListener("click", () => {
+      localStorage.setItem("smartdon-name", nameInput.value);
+      localStorage.setItem("smartdon-email", emailInput.value);
+      alert("Changes saved!");
+    });
+
+    // Upload profile image
+    document.getElementById("uploadInput").addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profilePic.src = e.target.result;
+          localStorage.setItem("smartdon-img", e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>

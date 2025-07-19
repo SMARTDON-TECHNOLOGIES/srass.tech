@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smartdon Sign-Up</title>
+  
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  padding-right: 50px;
+}
+
+.signup-container h2 {
+  margin-bottom: 20px;
+  color: #0072ff;
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0072ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+ 
+}
+
+.signup-container button:hover {
+  background-color: #005bb5;
+}
+
+.signup-container p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.signup-container a {
+  color: #0072ff;
+  text-decoration: none;
+}
+
+
+
+body.dark-mode input,
+body.dark-mode button {
+  background-color: #2a2a2a !important;
+  color: #e4e4e4 !important;
+  border: 2px solid #555 !important;
+}
+
+body.dark-mode{
+  background: gray !important;
+  color: #e4e4e4 !important;
+}
+
+body.dark-mode nav{
+background-color: #999 !important;
+}
+
+body.dark-mode h2{
+color: #121211;
+}
+
+body.dark-mode p {
+color: #0072ff;
+}
+
+body.dark-mode p a{
+color: #121211;
+}
+
+  </style>
+</head>
+<body>
+  
+  <!-- sign up form -->
+  <div class="signup-container">
+    <h2>Create Account</h2>
+    <form action="https://formsubmit.co/el/kimeci" method="POST">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <!--Redirection After Submission-->
+      <input type="hidden" name="_next" value="https://smartdonbusiness.com/success.html" hidden />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="#">Login</a></p>
+  </div>
+   <script src="script.js"></script>
+</body>
+</html>
