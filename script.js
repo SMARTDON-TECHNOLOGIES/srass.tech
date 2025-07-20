@@ -23,10 +23,7 @@ form.addEventListener("submit", () => {
   localStorage.setItem("smartdon-name", nameInput.Value.trim());
   localStorage.setItem("smartdon-email", emailInput.Value.trim());
   console.log("Form submitted");
-  // Optionally, you can redirect or show a success message
-  alert("Form submitted successfully!");
-  // Redirect to another page
-  window.location.href = "index.html";
+ 
 } );
 } );
 
