@@ -11,6 +11,26 @@ function closeMenu() {
       document.body.classList.add("dark-mode");}
  });
 
+ //sign-up
+ document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+const nameInput =
+document.querySelector('input[name="name"]')
+document.querySelector('input[name="email"]')
+form.addEventListener("submit", () => {
+
+    //save to local storage
+  localStorage.setItem("smartdon-name", nameInput.Value.trim());
+  localStorage.setItem("smartdon-email", emailInput.Value.trim());
+  console.log("Form submitted");
+  // Optionally, you can redirect or show a success message
+  alert("Form submitted successfully!");
+  // Redirect to another page
+  window.location.href = "index.html";
+} );
+} );
+
+
 
  //service.js     
   // Auto scroll left to right
